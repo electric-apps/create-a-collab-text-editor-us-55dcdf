@@ -8,44 +8,148 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from "./routes/__root"
-import { Route as IndexRouteImport } from "./routes/index"
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as DocDocIdRouteImport } from './routes/doc/$docId'
+import { Route as ApiYjsSplatRouteImport } from './routes/api/yjs/$'
+import { Route as ApiDocumentsShapeRouteImport } from './routes/api/documents/shape'
+import { Route as ApiDocumentsCreateRouteImport } from './routes/api/documents/create'
+import { Route as ApiDocumentsDocIdRouteImport } from './routes/api/documents/$docId'
 
 const IndexRoute = IndexRouteImport.update({
-  id: "/",
-  path: "/",
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocDocIdRoute = DocDocIdRouteImport.update({
+  id: '/doc/$docId',
+  path: '/doc/$docId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiYjsSplatRoute = ApiYjsSplatRouteImport.update({
+  id: '/api/yjs/$',
+  path: '/api/yjs/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiDocumentsShapeRoute = ApiDocumentsShapeRouteImport.update({
+  id: '/api/documents/shape',
+  path: '/api/documents/shape',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiDocumentsCreateRoute = ApiDocumentsCreateRouteImport.update({
+  id: '/api/documents/create',
+  path: '/api/documents/create',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiDocumentsDocIdRoute = ApiDocumentsDocIdRouteImport.update({
+  id: '/api/documents/$docId',
+  path: '/api/documents/$docId',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute
+  '/': typeof IndexRoute
+  '/doc/$docId': typeof DocDocIdRoute
+  '/api/documents/$docId': typeof ApiDocumentsDocIdRoute
+  '/api/documents/create': typeof ApiDocumentsCreateRoute
+  '/api/documents/shape': typeof ApiDocumentsShapeRoute
+  '/api/yjs/$': typeof ApiYjsSplatRoute
 }
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute
+  '/': typeof IndexRoute
+  '/doc/$docId': typeof DocDocIdRoute
+  '/api/documents/$docId': typeof ApiDocumentsDocIdRoute
+  '/api/documents/create': typeof ApiDocumentsCreateRoute
+  '/api/documents/shape': typeof ApiDocumentsShapeRoute
+  '/api/yjs/$': typeof ApiYjsSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  "/": typeof IndexRoute
+  '/': typeof IndexRoute
+  '/doc/$docId': typeof DocDocIdRoute
+  '/api/documents/$docId': typeof ApiDocumentsDocIdRoute
+  '/api/documents/create': typeof ApiDocumentsCreateRoute
+  '/api/documents/shape': typeof ApiDocumentsShapeRoute
+  '/api/yjs/$': typeof ApiYjsSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/"
+  fullPaths:
+    | '/'
+    | '/doc/$docId'
+    | '/api/documents/$docId'
+    | '/api/documents/create'
+    | '/api/documents/shape'
+    | '/api/yjs/$'
   fileRoutesByTo: FileRoutesByTo
-  to: "/"
-  id: "__root__" | "/"
+  to:
+    | '/'
+    | '/doc/$docId'
+    | '/api/documents/$docId'
+    | '/api/documents/create'
+    | '/api/documents/shape'
+    | '/api/yjs/$'
+  id:
+    | '__root__'
+    | '/'
+    | '/doc/$docId'
+    | '/api/documents/$docId'
+    | '/api/documents/create'
+    | '/api/documents/shape'
+    | '/api/yjs/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DocDocIdRoute: typeof DocDocIdRoute
+  ApiDocumentsDocIdRoute: typeof ApiDocumentsDocIdRoute
+  ApiDocumentsCreateRoute: typeof ApiDocumentsCreateRoute
+  ApiDocumentsShapeRoute: typeof ApiDocumentsShapeRoute
+  ApiYjsSplatRoute: typeof ApiYjsSplatRoute
 }
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/": {
-      id: "/"
-      path: "/"
-      fullPath: "/"
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/doc/$docId': {
+      id: '/doc/$docId'
+      path: '/doc/$docId'
+      fullPath: '/doc/$docId'
+      preLoaderRoute: typeof DocDocIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/yjs/$': {
+      id: '/api/yjs/$'
+      path: '/api/yjs/$'
+      fullPath: '/api/yjs/$'
+      preLoaderRoute: typeof ApiYjsSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/documents/shape': {
+      id: '/api/documents/shape'
+      path: '/api/documents/shape'
+      fullPath: '/api/documents/shape'
+      preLoaderRoute: typeof ApiDocumentsShapeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/documents/create': {
+      id: '/api/documents/create'
+      path: '/api/documents/create'
+      fullPath: '/api/documents/create'
+      preLoaderRoute: typeof ApiDocumentsCreateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/documents/$docId': {
+      id: '/api/documents/$docId'
+      path: '/api/documents/$docId'
+      fullPath: '/api/documents/$docId'
+      preLoaderRoute: typeof ApiDocumentsDocIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -53,14 +157,19 @@ declare module "@tanstack/react-router" {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DocDocIdRoute: DocDocIdRoute,
+  ApiDocumentsDocIdRoute: ApiDocumentsDocIdRoute,
+  ApiDocumentsCreateRoute: ApiDocumentsCreateRoute,
+  ApiDocumentsShapeRoute: ApiDocumentsShapeRoute,
+  ApiYjsSplatRoute: ApiYjsSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
-import type { getRouter } from "./router.tsx"
-import type { createStart } from "@tanstack/react-start"
-declare module "@tanstack/react-start" {
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
